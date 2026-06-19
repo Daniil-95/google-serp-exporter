@@ -1,0 +1,75 @@
+// Container
+@mixin container {
+  width: 100%;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+// Section spacing
+@mixin section-spacing {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+// Card
+@mixin card {
+  background: $white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+}
+
+// Button
+@mixin button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 24px;
+
+  background: $primary-color;
+  color: $white;
+
+  border: none;
+  border-radius: $radius-sm;
+
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: $primary-hover;
+  }
+}
+
+// Input
+@mixin input {
+  width: 100%;
+  padding: 14px 16px;
+
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+
+  font-size: 16px;
+
+  transition: $transition;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+}
+
+// Responsive
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}

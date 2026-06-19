@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
+<html lang="cs">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+		<title>{ifset title}{include title|stripHtml} | {/ifset}Google SERP Exporter</title>
 
-	{asset? 'main.js'}
-</head>
+		<meta name="description" content="Google SERP Exporter - export organických výsledků z první stránky Google do strukturovaného formátu.">
 
-<body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-	{include content}
-</body>
+		<link rel="stylesheet" href="/css/main.css">
+	</head>
+
+	<body>
+		{if $flashes}
+			<div class="flash-wrapper">
+				<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
+					{$flash->message}
+				</div>
+			</div>
+		{/if}
+
+		<main>
+			{include content}
+		</main>
+
+		<script src="/js/main.js"></script>
+	</body>
 </html>

@@ -1,11 +1,11 @@
 {
-	"name": "nette/web-project",
-	"description": "Nette: Standard Web Project",
-	"keywords": ["nette"],
+	"name": "daniil95/google-serp-exporter",
+	"description": "Web application for collecting and exporting Google search results.",
+	"keywords": ["nette", "google", "search", "json", "sqlite"],
 	"type": "project",
-	"license": ["MIT", "BSD-3-Clause", "GPL-2.0-only", "GPL-3.0-only"],
+	"license": "MIT",
 	"require": {
-		"php": ">= 8.2",
+		"php": "^8.4",
 		"nette/application": "^3.2.3",
 		"nette/assets": "^1.0.0",
 		"nette/bootstrap": "^3.2.6",
@@ -13,7 +13,7 @@
 		"nette/database": "^3.2",
 		"nette/di": "^3.2",
 		"nette/forms": "^3.2",
-		"nette/http": "^3.3",
+		"nette/http": "^3.4",
 		"nette/mail": "^4.0",
 		"nette/robot-loader": "^4.0",
 		"nette/security": "^3.2",
@@ -23,7 +23,7 @@
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",
-		"phpstan/phpstan": "^2.1",
+		"phpstan/phpstan": "^2.2",
 		"phpstan/extension-installer": "^1.4",
 		"nette/phpstan-rules": "^1.0@dev",
 		"symfony/thanks": "^1",
@@ -43,6 +43,7 @@
 		"allow-plugins": {
 			"symfony/thanks": true,
 			"phpstan/extension-installer": true
-		}
+		},
+		"sort-packages": true
 	}
 }
