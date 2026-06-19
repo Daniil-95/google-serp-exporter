@@ -26,6 +26,8 @@ final class HomePresenter extends BasePresenter
     {
         $form = new Form;
 
+        $form->addProtection();
+
         $form->addText('keyword', 'Klíčové slovo:')
             ->setRequired('Zadejte klíčové slovo.');
 
@@ -36,7 +38,7 @@ final class HomePresenter extends BasePresenter
         return $form;
     }
 
-    public function searchFormSucceeded(Form $form, \stdClass $values): void
+    public function searchFormSucceeded(Form $form, object $values): void
     {
         try {
             $this->results = $this->searchService->search(
