@@ -7,7 +7,7 @@ use Nette\Application\Attributes\Requires;
 
 
 /**
- * Handles 4xx HTTP error responses.
+ * Zpracovává 4xx HTTP chyby.
  */
 #[Requires(methods: '*', forward: true)]
 final class Error4xxPresenter extends BasePresenter

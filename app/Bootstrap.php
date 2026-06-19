@@ -30,7 +30,7 @@ class Bootstrap
 
 	public function initializeEnvironment(): void
 	{
-		//$this->configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
+		//$this->configurator->setDebugMode('secret@23.75.345.200'); // pro ladění na konkrétní IP
 		$this->configurator->enableTracy($this->rootDir . '/log');
 
 		$this->loadEnvironmentFile();
@@ -74,7 +74,7 @@ class Bootstrap
 				continue;
 			}
 
-			// Strip surrounding quotes if present
+			// Odstranění uvozovek z hodnoty, pokud jsou přítomny
 			if (strlen($value) >= 2) {
 				$first = $value[0];
 				$last = $value[strlen($value) - 1];

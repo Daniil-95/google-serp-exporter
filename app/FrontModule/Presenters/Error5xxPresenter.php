@@ -10,7 +10,7 @@ use Tracy\ILogger;
 
 
 /**
- * Handles uncaught exceptions and errors, and logs them.
+ * Zachytává neošetřené výjimky a chyby a loguje je.
  */
 #[Requires(forward: true)]
 final class Error5xxPresenter implements Nette\Application\IPresenter

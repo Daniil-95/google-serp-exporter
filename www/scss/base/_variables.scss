@@ -1,4 +1,4 @@
-// Colors
+// Barvy
 $primary-color: #2563eb;
 $primary-hover: #1d4ed8;
 $primary-light: #eff6ff;
@@ -16,23 +16,23 @@ $white: #ffffff;
 
 $border-color: #e5e7eb;
 
-// Typography
+// Typografie
 $font-primary: "Inter", sans-serif;
 
-// Layout
+// Rozložení
 $container-width: 1200px;
 $content-width: 820px;
 
-// Border radius
+// Zaoblení
 $radius-sm: 8px;
 $radius-md: 12px;
 $radius-lg: 20px;
 
-// Shadows
+// Stíny
 $shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
 $shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
 $shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
 $shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
 
-// Transitions
+// Přechody
 $transition: all 0.2s ease-in-out;
