@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Presentation\Accessory;
+namespace App\FrontModule\Presenters;
 
 use Latte\Extension;
 

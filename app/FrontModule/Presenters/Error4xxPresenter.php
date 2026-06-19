@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Presentation\Error\Error4xx;
+namespace App\FrontModule\Presenters;
 
 use Nette;
 use Nette\Application\Attributes\Requires;
@@ -10,15 +10,18 @@ use Nette\Application\Attributes\Requires;
  * Handles 4xx HTTP error responses.
  */
 #[Requires(methods: '*', forward: true)]
-final class Error4xxPresenter extends Nette\Application\UI\Presenter
+final class Error4xxPresenter extends BasePresenter
 {
 	public function renderDefault(Nette\Application\BadRequestException $exception): void
 	{
-		// renders the appropriate error template based on the HTTP status code
 		$code = $exception->getCode();
-		$file = is_file($file = __DIR__ . "/$code.latte")
+
+		$templateDir = __DIR__ . '/../templates/Error/Error4xx';
+
+		$file = is_file($file = $templateDir . "/$code.latte")
 			? $file
-			: __DIR__ . '/4xx.latte';
+			: $templateDir . '/4xx.latte';
+
 		$this->template->httpCode = $code;
 		$this->template->setFile($file);
 	}

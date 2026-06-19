@@ -35,9 +35,9 @@ class Bootstrap
 
 		$this->loadEnvironmentFile();
 
-        $this->configurator->addDynamicParameters([
-            'serpApiKey' => getenv('SERPAPI_API_KEY') ?: '',
-        ]);
+		$this->configurator->addDynamicParameters([
+			'serpApiKey' => getenv('SERPAPI_API_KEY') ?: '',
+		]);
 
 		$this->configurator->createRobotLoader()
 			->addDirectory(__DIR__)

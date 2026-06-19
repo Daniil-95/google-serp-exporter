@@ -1,14 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Presentation\Home;
+namespace App\FrontModule\Presenters;
 
 use App\Model\Entity\SearchResult;
 use App\Model\Service\SearchService;
 use Nette\Application\Responses\TextResponse;
 use Nette\Application\UI\Form;
-use Nette\Application\UI\Presenter;
 
-final class HomePresenter extends Presenter
+final class HomePresenter extends BasePresenter
 {
     private array $results = [];
 
