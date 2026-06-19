@@ -39,4 +39,4 @@ RUN composer install --no-interaction --optimize-autoloader
 EXPOSE 8000
 
 # Start built-in PHP server
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "www"]
+CMD sh -c "php -S 0.0.0.0:${PORT:-8000} -t www"
