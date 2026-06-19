@@ -1,0 +1,13 @@
+# Vynechani adresare z Docker kontextu pro rychlejsi build
+.git/
+.gitignore
+.idea/
+.vendor/
+vendor/
+node_modules/
+temp/
+log/
+*.log
+*.md
+.DS_Store
+Thumbs.db

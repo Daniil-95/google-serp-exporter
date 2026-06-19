@@ -34,6 +34,11 @@
 			"App\\": "app"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests"
+		}
+	},
 	"scripts": {
 		"phpstan": "phpstan analyse",
 		"tester": "tester tests -s"

@@ -1,0 +1,63 @@
+# =============================================================================
+# docker-compose.yml pro Google SERP Exporter
+# =============================================================================
+# Tato konfigurace slouzi pro lokalni vyvoj. Aplikace bezi na vestavenem PHP
+# serveru. Pridejte dalsi sluzby (databaze, API apod.) podle potreby.
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Sluzba: app
+  # ---------------------------------------------------------------------------
+  # Hlavni PHP aplikace Google SERP Exporter.
+  # Po spusteni je dostupna na http://localhost:8000.
+  # ---------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: google-serp-exporter
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mapovani zdrojovych souboru pro okamzite zmeny bez rebuildu.
+      - .:/var/www/html
+      # Adresare temp a log nechame ve zvlastnich named volumes,
+      # aby se neprepisovaly pri zmene zdrojovych souboru z hostitele
+      # a aby byla zachovana prava (v Alpine bezici jako www-data).
+      - app-temp:/var/www/html/temp
+      - app-log:/var/www/html/log
+      - app-storage:/var/www/html/storage
+    environment:
+      # SerpApi API klíč (získejte na https://serpapi.com)
+      SERPAPI_API_KEY: "${SERPAPI_API_KEY}"
+      # Volitelne: prepnuti do debug rezimu (Tracy)
+      # NETTE_DEBUG: "1"
+      #
+      # Pokud je treba zmenit cestu k databazi nebo dalsi parametry,
+      # lze je predat pres promenne prostredi a nacist v Neon konfiguraci.
+      DB_PATH: "/var/www/html/storage/database.sqlite"
+
+# ---------------------------------------------------------------------------
+# Named volumes pro perzistentni data
+# ---------------------------------------------------------------------------
+# temp   - cache a kompilovane DI containery
+# log    - Tracy logy (vyjimky, chyby)
+# storage- SQLite databaze a uzivatelska data
+# ---------------------------------------------------------------------------
+volumes:
+  app-temp:
+  app-log:
+  app-storage:
+
+# ---------------------------------------------------------------------------
+# Promenne prostredi (volitelne: nacte se z .env, pokud existuje)
+# ---------------------------------------------------------------------------
+# Vytvorte soubor .env v korenovem adresari projektu na zaklade .env.example:
+#
+#   SERPAPI_API_KEY=vas_api_klic
+#
+# nebo nastavte promennou rucne pri spusteni:
+#
+#   SERPAPI_API_KEY=vas_api_klic docker compose up
+# ---------------------------------------------------------------------------

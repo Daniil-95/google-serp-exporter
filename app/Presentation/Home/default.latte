@@ -15,7 +15,7 @@
 
 			{if $results}
 				<div class="results">
-					<h2 class="results-title">Výsledky</h2>
+					<h2 class="results-title">Výsledky <span class="results-count">({count($results)})</span></h2>
 
 					{foreach $results as $result}
 						<article class="result-card">
@@ -34,6 +34,12 @@
 							</p>
 						</article>
 					{/foreach}
+
+					<div class="results-actions">
+						<a n:href="exportJson" class="btn-download">
+							Stáhnout JSON
+						</a>
+					</div>
 				</div>
 			{/if}
 		</div>

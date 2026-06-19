@@ -2,7 +2,9 @@
 
 namespace App\Presentation\Home;
 
+use App\Model\Entity\SearchResult;
 use App\Model\Service\SearchService;
+use Nette\Application\Responses\TextResponse;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
 
@@ -37,10 +39,46 @@ final class HomePresenter extends Presenter
 
     public function searchFormSucceeded(Form $form, \stdClass $values): void
     {
-        $this->results = $this->searchService->search(
-            $values->keyword
-        );
+        try {
+            $this->results = $this->searchService->search(
+                $values->keyword
+            );
 
-        $this->template->results = $this->results;
+            $this->template->results = $this->results;
+
+            $section = $this->getSession('App\Search');
+            $section->results = $this->results;
+
+        } catch (\RuntimeException $e) {
+            $this->flashMessage($e->getMessage(), 'error');
+            $this->redirect('this');
+        }
+    }
+
+
+    public function actionExportJson(): void
+    {
+        $section = $this->getSession('App\Search');
+        $results = $section->results ?? [];
+
+        if ($results === []) {
+            $this->flashMessage('Nejprve proveďte vyhledávání.', 'error');
+            $this->redirect('default');
+        }
+
+        $data = array_map(function (SearchResult $result): array {
+            return [
+                'title' => $result->title,
+                'url' => $result->url,
+                'description' => $result->description,
+            ];
+        }, $results);
+
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $this->getHttpResponse()->setContentType('application/json', 'utf-8');
+        $this->getHttpResponse()->setHeader('Content-Disposition', 'attachment; filename="search-results.json"');
+
+        $this->sendResponse(new TextResponse($json));
     }
 }

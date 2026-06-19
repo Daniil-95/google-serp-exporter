@@ -1,6 +1,10 @@
 services:
 	- App\Core\RouterFactory::createRouter
-	- App\Model\Service\MockSearchService
+
+	googleSearchService:
+		factory: App\Model\Service\GoogleSearchService(
+			%serpApiKey%
+		)
 
 
 search:

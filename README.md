@@ -36,12 +36,48 @@ Google SERP Exporter umožňuje zadat klíčové slovo, získat výsledky vyhled
 composer install
 ```
 
+## Konfigurace
+
+Pro reálné vyhledávání přes SerpApi je potřeba nastavit API klíč:
+
+1. Zaregistrujte se na [serpapi.com](https://serpapi.com) a získejte API klíč.
+2. Zkopírujte soubor `.env.example` na `.env` a doplňte svůj klíč:
+
+```bash
+cp .env.example .env
+```
+
+3. Upravte `.env`:
+
+```dotenv
+SERPAPI_API_KEY="vas_api_klic"
+```
+
+Alternativně lze klíč nastavit jako systémovou proměnnou prostředí:
+
+```bash
+# Linux / macOS
+export SERPAPI_API_KEY=vas_api_klic
+
+# Windows (PowerShell)
+$env:SERPAPI_API_KEY="vas_api_klic"
+
+# Docker
+docker compose run -e SERPAPI_API_KEY=vas_api_klic ...
+```
+
 ## Spuštění aplikace
 
-Vestavěný PHP server:
+### Lokálně (vestavěný PHP server)
 
 ```bash
 php -S localhost:8000 -t www
+```
+
+### Docker
+
+```bash
+docker compose up --build
 ```
 
 Aplikace bude dostupná na:
@@ -84,6 +120,7 @@ Projekt využívá oddělení prezentační a aplikační vrstvy:
 * **Presenter** zpracovává HTTP požadavky a formuláře.
 * **SearchService** poskytuje rozhraní pro získávání výsledků vyhledávání.
 * **MockSearchService** slouží pro lokální vývoj a testování.
+* **GoogleSearchService** implementuje reálné vyhledávání přes SerpApi.
 * Datová vrstva je připravena pro ukládání výsledků do SQLite.
 
 ## Roadmap
