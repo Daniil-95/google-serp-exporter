@@ -1,6 +1,32 @@
+{block title}Chybný požadavek | Google SERP Exporter{/block}
+
 {block content}
-<h1 n:block=title>Oops...</h1>
+    <div class="error-page">
+        <div class="error-card">
+            <div class="error-icon">
+                ⚠️
+            </div>
 
-<p>Your browser sent a request that this server could not understand or process.</p>
+            <div class="error-code">
+                Error {$httpCode}
+            </div>
 
-<p><small>error {$httpCode}</small></p>
+            <h1 class="error-title">
+                Oops...
+            </h1>
+
+            <p class="error-description">
+                Požadavek nebylo možné zpracovat. Zadaná stránka neexistuje
+                nebo byl odeslán neplatný požadavek.
+            </p>
+
+            <a n:href="Homepage:default" class="error-button">
+                Zpět na hlavní stránku
+            </a>
+
+            <div class="error-footer">
+                Google SERP Exporter • PHP 8.3 • Nette Framework
+            </div>
+        </div>
+    </div>
+{/block}

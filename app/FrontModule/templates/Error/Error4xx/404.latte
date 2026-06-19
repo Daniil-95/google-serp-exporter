@@ -1,8 +1,32 @@
+{block title}Stránka nenalezena | Google SERP Exporter{/block}
+
 {block content}
-<h1 n:block=title>Page Not Found</h1>
+    <div class="error-page">
+        <div class="error-card">
+            <div class="error-icon">
+                🔍
+            </div>
 
-<p>The page you requested could not be found. It is possible that the address is
-incorrect, or that the page no longer exists. Please use a search engine to find
-what you are looking for.</p>
+            <div class="error-code error-code--404">
+                Error 404
+            </div>
 
-<p><small>error 404</small></p>
+            <h1 class="error-title">
+                Stránka nebyla nalezena
+            </h1>
+
+            <p class="error-description">
+                Požadovaná stránka neexistuje nebo byla přesunuta.
+                Zkontrolujte zadanou adresu nebo se vraťte na hlavní stránku aplikace.
+            </p>
+
+            <a n:href="Homepage:default" class="error-button">
+                Zpět na hlavní stránku
+            </a>
+
+            <div class="error-footer">
+                Google SERP Exporter • PHP 8.3 • Nette Framework
+            </div>
+        </div>
+    </div>
+{/block}

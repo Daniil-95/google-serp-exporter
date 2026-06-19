@@ -51,7 +51,7 @@ final class GoogleSearchService implements SearchService
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_TIMEOUT => 30,
-			CURLOPT_SSL_VERIFYPEER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_USERAGENT => 'Google-SERP-Exporter/1.0',
 		]);
 

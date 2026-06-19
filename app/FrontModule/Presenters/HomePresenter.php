@@ -6,11 +6,10 @@ use App\Model\Entity\SearchResult;
 use App\Model\Service\SearchService;
 use Nette\Application\Responses\TextResponse;
 use Nette\Application\UI\Form;
+use Nette\Http\SessionSection;
 
 final class HomePresenter extends BasePresenter
 {
-    private array $results = [];
-
     public function __construct(
         private SearchService $searchService
     ) {
@@ -19,7 +18,11 @@ final class HomePresenter extends BasePresenter
 
     public function renderDefault(): void
     {
-        $this->template->results = $this->results;
+        $section = $this->getSearchSection();
+
+        $this->template->results = $section->results ?? [];
+        $this->template->lastKeyword = $section->lastKeyword ?? null;
+        $this->template->searchHistory = $section->history ?? [];
     }
 
     protected function createComponentSearchForm(): Form
@@ -38,17 +41,19 @@ final class HomePresenter extends BasePresenter
         return $form;
     }
 
-    public function searchFormSucceeded(Form $form, object $values): void
+    public function searchFormSucceeded(Form $form, \stdClass $values): void
     {
         try {
-            $this->results = $this->searchService->search(
-                $values->keyword
-            );
+            $results = $this->searchService->search($values->keyword);
 
-            $this->template->results = $this->results;
+            $section = $this->getSearchSection();
 
-            $section = $this->getSession('App\Search');
-            $section->results = $this->results;
+            $section->results = $results;
+            $section->lastKeyword = $values->keyword;
+
+            $this->updateSearchHistory($values->keyword);
+
+            $this->redirect('default');
 
         } catch (\RuntimeException $e) {
             $this->flashMessage($e->getMessage(), 'error');
@@ -56,10 +61,21 @@ final class HomePresenter extends BasePresenter
         }
     }
 
+    public function actionNewSearch(): void
+    {
+        $section = $this->getSearchSection();
+
+        unset(
+            $section->results,
+            $section->lastKeyword
+        );
+
+        $this->redirect('default');
+    }
 
     public function actionExportJson(): void
     {
-        $section = $this->getSession('App\Search');
+        $section = $this->getSearchSection();
         $results = $section->results ?? [];
 
         if ($results === []) {
@@ -67,19 +83,50 @@ final class HomePresenter extends BasePresenter
             $this->redirect('default');
         }
 
-        $data = array_map(function (SearchResult $result): array {
-            return [
+        $data = array_map(
+            static fn (SearchResult $result): array => [
                 'title' => $result->title,
                 'url' => $result->url,
                 'description' => $result->description,
-            ];
-        }, $results);
+            ],
+            $results
+        );
 
-        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $json = json_encode(
+            $data,
+            JSON_PRETTY_PRINT
+            | JSON_UNESCAPED_UNICODE
+            | JSON_THROW_ON_ERROR
+        );
 
-        $this->getHttpResponse()->setContentType('application/json', 'utf-8');
-        $this->getHttpResponse()->setHeader('Content-Disposition', 'attachment; filename="search-results.json"');
+        $this->getHttpResponse()->setContentType(
+            'application/json',
+            'utf-8'
+        );
+
+        $this->getHttpResponse()->setHeader(
+            'Content-Disposition',
+            'attachment; filename="search-results.json"'
+        );
 
         $this->sendResponse(new TextResponse($json));
+    }
+
+    private function updateSearchHistory(string $keyword): void
+    {
+        $section = $this->getSearchSection();
+
+        $history = $section->history ?? [];
+
+        array_unshift($history, $keyword);
+
+        $history = array_values(array_unique($history));
+
+        $section->history = array_slice($history, 0, 5);
+    }
+
+    private function getSearchSection(): SessionSection
+    {
+        return $this->getSession('App\\Search');
     }
 }

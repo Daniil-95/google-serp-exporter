@@ -1,6 +1,32 @@
+{block title}Obsah byl odstraněn | Google SERP Exporter{/block}
+
 {block content}
-<h1 n:block=title>Page Not Found</h1>
+    <div class="error-page">
+        <div class="error-card">
+            <div class="error-icon">
+                🗑️
+            </div>
 
-<p>The page you requested has been taken off the site. We apologize for the inconvenience.</p>
+            <div class="error-code error-code--404">
+                Error 410
+            </div>
 
-<p><small>error 410</small></p>
+            <h1 class="error-title">
+                Obsah byl odstraněn
+            </h1>
+
+            <p class="error-description">
+                Požadovaná stránka nebo obsah byly trvale odstraněny a již nejsou k dispozici.
+                Omlouváme se za případné nepříjemnosti.
+            </p>
+
+            <a n:href="Homepage:default" class="error-button">
+                Zpět na hlavní stránku
+            </a>
+
+            <div class="error-footer">
+                Google SERP Exporter • PHP 8.3 • Nette Framework
+            </div>
+        </div>
+    </div>
+{/block}

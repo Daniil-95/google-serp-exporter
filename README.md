@@ -1,33 +1,40 @@
 # Google SERP Exporter
 
-Webová aplikace pro získávání, ukládání a export výsledků vyhledávání z Google SERP.
+Webová aplikace vytvořená v PHP a Nette Frameworku pro získávání organických výsledků vyhledávání Google a jejich export do JSON formátu.
 
 ## Přehled
 
-Google SERP Exporter umožňuje zadat klíčové slovo, získat výsledky vyhledávání a exportovat je do strukturovaného formátu. Projekt je postaven na frameworku Nette a využívá čistou architekturu s oddělenou prezentační a servisní vrstvou.
+Google SERP Exporter umožňuje zadat klíčové slovo, získat organické výsledky z první stránky Google a následně je exportovat do strojově čitelného JSON souboru.
+
+Aplikace byla vytvořena jako technické zadání a klade důraz na jednoduchou architekturu, čistý kód a přehledné uživatelské rozhraní.
 
 ## Funkce
 
 * Vyhledávání podle klíčového slova
-* Získání organických výsledků vyhledávání
-* Export výsledků do formátu JSON
-* Uložení historie vyhledávání do SQLite databáze
+* Získání organických výsledků z první stránky Google
+* Zobrazení výsledků v moderním uživatelském rozhraní
+* Export výsledků do JSON souboru
+* Historie posledních vyhledávání
+* Uložení výsledků do Session pro následný export
+* Ochrana formuláře pomocí CSRF
 * Jednotkové testy pomocí PHPUnit
-* Připravená servisní vrstva pro integraci externích API
+* Docker Compose pro lokální spuštění
 
-## Technologie
+## Použité technologie
 
-* PHP 8.4
+* PHP 8.3
 * Nette Framework 3.x
-* SQLite
+* Latte Templates
 * PHPUnit
 * Composer
 * SCSS
 * JavaScript (ES6)
+* Docker & Docker Compose
+* SerpApi
 
 ## Požadavky
 
-* PHP 8.4 nebo novější
+* PHP 8.3 nebo novější
 * Composer 2.x
 
 ## Instalace
@@ -38,49 +45,45 @@ composer install
 
 ## Konfigurace
 
-Pro reálné vyhledávání přes SerpApi je potřeba nastavit API klíč:
+Pro reálné vyhledávání je potřeba API klíč pro SerpApi.
 
-1. Zaregistrujte se na [serpapi.com](https://serpapi.com) a získejte API klíč.
-2. Zkopírujte soubor `.env.example` na `.env` a doplňte svůj klíč:
+1. Zkopírujte soubor:
 
 ```bash
 cp .env.example .env
 ```
 
-3. Upravte `.env`:
+2. Doplňte vlastní API klíč:
 
 ```dotenv
-SERPAPI_API_KEY="vas_api_klic"
+SERPAPI_API_KEY=your_api_key
 ```
 
-Alternativně lze klíč nastavit jako systémovou proměnnou prostředí:
+API klíč lze získat na:
 
-```bash
-# Linux / macOS
-export SERPAPI_API_KEY=vas_api_klic
-
-# Windows (PowerShell)
-$env:SERPAPI_API_KEY="vas_api_klic"
-
-# Docker
-docker compose run -e SERPAPI_API_KEY=vas_api_klic ...
-```
+https://serpapi.com
 
 ## Spuštění aplikace
 
-### Lokálně (vestavěný PHP server)
+### Lokálně
 
 ```bash
 php -S localhost:8000 -t www
 ```
 
-### Docker
+Aplikace bude dostupná na:
+
+```text
+http://localhost:8000
+```
+
+### Docker Compose
 
 ```bash
 docker compose up --build
 ```
 
-Aplikace bude dostupná na:
+Po spuštění bude aplikace dostupná na stejné adrese:
 
 ```text
 http://localhost:8000
@@ -96,42 +99,56 @@ vendor/bin/phpunit
 
 ```text
 app/
+├── FrontModule/
+│   └── Presenters/
 ├── Model/
 │   ├── Entity/
 │   └── Service/
-├── Presentation/
-│   └── Home/
-└── Bootstrap.php
 
 config/
-storage/
 tests/
-
 www/
-├── css/
-├── js/
-└── scss/
 ```
 
 ## Architektura
 
-Projekt využívá oddělení prezentační a aplikační vrstvy:
+### HomePresenter
 
-* **Presenter** zpracovává HTTP požadavky a formuláře.
-* **SearchService** poskytuje rozhraní pro získávání výsledků vyhledávání.
-* **MockSearchService** slouží pro lokální vývoj a testování.
-* **GoogleSearchService** implementuje reálné vyhledávání přes SerpApi.
-* Datová vrstva je připravena pro ukládání výsledků do SQLite.
+Zpracovává:
 
-## Roadmap
+* vyhledávací formulář
+* historii vyhledávání
+* export JSON
+* práci se session
 
-* Integrace Google Custom Search API
+### SearchService
+
+Definuje rozhraní pro získávání výsledků vyhledávání.
+
+### GoogleSearchService
+
+Implementace komunikace se službou SerpApi.
+
+### SearchResult
+
+Datový objekt reprezentující jeden výsledek vyhledávání.
+
+## Bezpečnost
+
+Aplikace obsahuje:
+
+* CSRF ochranu formuláře
+* validaci vstupních dat
+* oddělení prezentační a servisní vrstvy
+* ukládání API klíčů mimo zdrojový kód pomocí `.env`
+
+## Budoucí rozšíření
+
 * Export do CSV
 * Export do XLSX
-* Ukládání historie vyhledávání
-* Docker Compose pro lokální vývoj
-* GitHub Actions CI/CD
 * Pokročilé filtrování výsledků
+* Ukládání historie do databáze
+* GitHub Actions CI/CD
 
 ## Licence
 

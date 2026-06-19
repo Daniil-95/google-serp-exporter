@@ -1,6 +1,7 @@
 // Colors
 $primary-color: #2563eb;
 $primary-hover: #1d4ed8;
+$primary-light: #eff6ff;
 
 $success-color: #16a34a;
 $error-color: #dc2626;
@@ -8,6 +9,7 @@ $warning-color: #f59e0b;
 
 $text-color: #111827;
 $text-light: #6b7280;
+$text-muted: #9ca3af;
 
 $background-color: #f4f7fb;
 $white: #ffffff;
@@ -19,7 +21,7 @@ $font-primary: "Inter", sans-serif;
 
 // Layout
 $container-width: 1200px;
-$content-width: 900px;
+$content-width: 820px;
 
 // Border radius
 $radius-sm: 8px;
@@ -27,8 +29,10 @@ $radius-md: 12px;
 $radius-lg: 20px;
 
 // Shadows
-$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
 $shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+$shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
 
 // Transitions
 $transition: all 0.2s ease-in-out;

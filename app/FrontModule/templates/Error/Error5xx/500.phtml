@@ -1,27 +1,48 @@
-<!DOCTYPE html><!-- "' --></textarea></script></style></pre></xmp></a></audio></button></canvas></datalist></details></dialog></iframe></listing></meter></noembed></noframes></noscript></optgroup></option></progress></rp></select></table></template></title></video>
-<meta charset="utf-8">
-<meta name="robots" content="noindex">
-<title>Server Error</title>
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-	#nette-error { all: initial; position: absolute; top: 0; left: 0; right: 0; height: 70vh; min-height: 400px; display: flex; align-items: center; justify-content: center; z-index: 1000 }
-	#nette-error div { all: initial; max-width: 550px; background: white; color: #333; display: block }
-	#nette-error h1 { all: initial; font: bold 50px/1.1 sans-serif; display: block; margin: 40px }
-	#nette-error p { all: initial; font: 20px/1.4 sans-serif; margin: 40px; display: block }
-	#nette-error small { color: gray }
-</style>
+        <title>Server Error | Google SERP Exporter</title>
 
-<div id=nette-error>
-	<div>
-		<h1>Server Error</h1>
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+        <div class="error-page">
+            <div class="error-card">
+                <div class="error-icon">
+                    ⚙️
+                </div>
 
-		<p>We're sorry! The server encountered an internal error and
-		was unable to complete your request. Please try later.</p>
+                <div class="error-code error-code--500">
+                    Error 500
+                </div>
 
-		<p><small>error 500</small></p>
-	</div>
-</div>
+                <h1 class="error-title">
+                    Server Error
+                </h1>
 
-<script>
-	document.body.insertBefore(document.getElementById('nette-error'), document.body.firstChild);
-</script>
+                <p class="error-description">
+                    Při zpracování požadavku došlo k neočekávané chybě.
+                    Zkuste stránku obnovit nebo se vraťte na hlavní stránku aplikace.
+                </p>
+
+                <div class="actions">
+                    <a href="/" class="error-button">
+                        Domovská stránka
+                    </a>
+
+                    <a href="javascript:location.reload()" class="error-button error-button--secondary">
+                        Obnovit stránku
+                    </a>
+                </div>
+
+                <div class="error-footer">
+                    Google SERP Exporter • PHP 8.3 • Nette Framework
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
