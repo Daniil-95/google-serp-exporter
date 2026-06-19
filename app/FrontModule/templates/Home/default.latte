@@ -17,7 +17,19 @@
 
 			<div class="search-form-wrapper">
 				<div class="search-form">
-					{control searchForm}
+					{form searchForm}
+						<div class="search-form-group">
+							<label n:name="keyword" class="search-label">
+								Klíčové slovo
+							</label>
+
+							<input n:name="keyword" class="search-input" placeholder="Např. php nette">
+
+							<button n:name="search" class="search-button">
+								Vyhledat
+							</button>
+						</div>
+					{/form}
 				</div>
 			</div>
 
@@ -120,9 +132,13 @@
 
 	<footer class="site-footer">
 		<div class="footer-content">
-			<strong class="footer-brand">Google SERP Exporter</strong>
-			<span class="footer-divider">&mdash;</span>
-			<span class="footer-tech">PHP 8.3 &bull; Nette Framework &bull; JSON Export</span>
+			<span class="footer-brand">Google SERP Exporter</span>
+			<span class="footer-separator">&bull;</span>
+			<span class="footer-copyright">&copy; {=date('Y')}</span>
+			<span class="footer-separator">&bull;</span>
+			<span class="footer-author">Created by Daniil Andru&scaron;ko</span>
+			<span class="footer-separator">&bull;</span>
+			<a href="https://github.com/Daniil-95" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
 		</div>
 	</footer>
 {/block}

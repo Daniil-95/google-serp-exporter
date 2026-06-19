@@ -31,7 +31,7 @@ final class HomePresenter extends BasePresenter
 
         $form->addProtection();
 
-        $form->addText('keyword', 'Klíčové slovo:')
+        $form->addText('keyword', 'Klíčové slovo')
             ->setRequired('Zadejte klíčové slovo.');
 
         $form->addSubmit('search', 'Vyhledat');

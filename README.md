@@ -6,13 +6,13 @@ Webová aplikace vytvořená v PHP a Nette Frameworku pro získávání organick
 
 Google SERP Exporter umožňuje zadat klíčové slovo, získat organické výsledky z první stránky Google a následně je exportovat do strojově čitelného JSON souboru.
 
-Aplikace byla vytvořena jako technické zadání a klade důraz na jednoduchou architekturu, čistý kód a přehledné uživatelské rozhraní.
+Aplikace byla vytvořena jako součást technického zadání a klade důraz na jednoduchou architekturu, čistý kód, testovatelnost a přehledné uživatelské rozhraní.
 
 ## Funkce
 
 * Vyhledávání podle klíčového slova
-* Získání organických výsledků z první stránky Google
-* Zobrazení výsledků v moderním uživatelském rozhraní
+* Získání organických výsledků z první stránky Google pomocí SerpApi
+* Zobrazení výsledků v přehledném uživatelském rozhraní
 * Export výsledků do JSON souboru
 * Historie posledních vyhledávání
 * Uložení výsledků do Session pro následný export
@@ -79,11 +79,13 @@ http://localhost:8000
 
 ### Docker Compose
 
+Docker Compose je součástí projektu jako bonusový bod zadání.
+
 ```bash
 docker compose up --build
 ```
 
-Po spuštění bude aplikace dostupná na stejné adrese:
+Po spuštění bude aplikace dostupná na:
 
 ```text
 http://localhost:8000
@@ -142,14 +144,6 @@ Aplikace obsahuje:
 * oddělení prezentační a servisní vrstvy
 * ukládání API klíčů mimo zdrojový kód pomocí `.env`
 
-## Budoucí rozšíření
+## Autor
 
-* Export do CSV
-* Export do XLSX
-* Pokročilé filtrování výsledků
-* Ukládání historie do databáze
-* GitHub Actions CI/CD
-
-## Licence
-
-MIT
+Daniil Andruško
