@@ -10,11 +10,11 @@ use Nette\Http\SessionSection;
 
 final class HomePresenter extends BasePresenter
 {
-    public function __construct(
-        private SearchService $searchService
-    ) {
-        parent::__construct();
-    }
+//    public function __construct(
+//        private SearchService $searchService
+//    ) {
+//        parent::__construct();
+//    }
 
     public function renderDefault(): void
     {
